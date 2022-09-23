@@ -32,8 +32,5 @@ RSpec.describe 'Api::V1::Registrations', type: :request do
       expect(payload['id']).to be_nil
       expect(response).to have_http_status(:unprocessable_entity)
     end
-
-
-
   end
 end
