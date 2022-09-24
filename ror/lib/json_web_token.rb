@@ -1,6 +1,6 @@
 # create a JsonWebToken
 class JsonWebToken
-  SECRET_KEY = ENV['SECRET_KEY_BASE']
+  SECRET_KEY = '123456'.freeze
 
   def self.encode(payload, exp = 24.hours.from_now)
     payload[:exp] = exp.to_i
