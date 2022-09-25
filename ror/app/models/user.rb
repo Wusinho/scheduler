@@ -10,6 +10,4 @@ class User < ApplicationRecord
   def add_first_sign_in_counter
     self.sign_in_count = 1
   end
-
-
 end

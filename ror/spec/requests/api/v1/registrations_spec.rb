@@ -16,7 +16,7 @@ RSpec.describe 'Api::V1::Registrations', type: :request do
       payload = JSON.parse(response.body)
       expect(payload).to_not be_empty
       expect(payload['id']).not_to be_nil
-      expect(payload['id']).to eql '2312312'
+      expect(payload['id'].length).to eql 36
       expect(payload['sign_in_count']).to eql 1
       expect(response).to have_http_status(:created)
     end

@@ -7,7 +7,7 @@ RSpec.describe Organization, type: :model do
     end
 
     it 'validate relations' do
-      should have_one(:user)
+      should belong_to(:user)
     end
   end
 
