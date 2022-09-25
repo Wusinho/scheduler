@@ -9,6 +9,7 @@ class User < ApplicationRecord
   before_save :add_sign_in_counter
   before_save :capitalize_name
 
+  accepts_nested_attributes_for :organization
   def add_sign_in_counter
     self.sign_in_count += 1
   end
