@@ -10,10 +10,12 @@ module Api
           @user.add_sign_in_counter
           render json: {
             token: JsonWebToken.encode(user_id: @user.id),
-            email: @user.email,
-          }
+            email: @user.email
+          }, status: :created
         else
-          head :unauthorized
+          render json: {
+            error: 'Wrong email/password'
+          }, status: :not_found
         end
       end
 

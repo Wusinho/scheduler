@@ -4,7 +4,6 @@ module Api
   module V1
     # User's registration
     class RegistrationsController < ApplicationController
-
       def create
         @user = User.new(user_params)
         if @user.save
@@ -19,7 +18,6 @@ module Api
       def user_params
         params.require(:user).permit(:name, :last_name, :username, :password, :email)
       end
-
     end
   end
 end
