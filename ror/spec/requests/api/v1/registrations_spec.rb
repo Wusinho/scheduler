@@ -6,8 +6,8 @@ RSpec.describe 'Api::V1::Registrations', type: :request do
       user = {
         user: {
           email: 'heberlazo2@gmail.com',
-          name: 'Heber',
-          last_name: 'Lazo',
+          name: 'heber',
+          last_name: 'lazo',
           username: 'Hlazo',
           password: '123456'
         }
