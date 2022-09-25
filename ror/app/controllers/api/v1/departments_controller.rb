@@ -20,7 +20,7 @@ module Api
       private
 
       def department_params
-        params.require(:department).permit(:name, :supervised_hrs)
+        params.require(:department).permit(:name, :supervised_hrs => [])
       end
     end
   end
