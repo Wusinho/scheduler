@@ -8,6 +8,7 @@ class JsonWebToken
   end
 
   def self.decode(token)
-    JWT.decode(token, SECRET_KEY)
+    bearer_token = token.split(' ')
+    JWT.decode(bearer_token.last, SECRET_KEY)
   end
 end

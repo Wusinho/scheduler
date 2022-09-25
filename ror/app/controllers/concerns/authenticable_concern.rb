@@ -8,7 +8,7 @@ module AuthenticableConcern
     return if header.nil?
 
     decoded = JsonWebToken.decode(header)
-    @current_user = User.find(decoded.first['id'])
+    @current_user = User.find(decoded.first['user_id'])
   end
 
   protected
