@@ -9,7 +9,7 @@ module Api
       def create
 
         @department = current_user_org.departments.build(department_params)
-        debugger
+
         if @department.save
           render json: @department, status: :created
         else
