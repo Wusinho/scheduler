@@ -5,6 +5,6 @@ FactoryBot.define do
     name { full_name.first }
     last_name { full_name.last }
     username { Faker::Games::LeagueOfLegends.champion }
-    password { '123456' }
+    password { '123456aA' }
   end
 end

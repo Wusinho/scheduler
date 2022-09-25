@@ -7,9 +7,10 @@ module Api
       def create
         @user = User.find_by_email(user_params[:email])
         if @user&.authenticate(user_params[:password])
+          @user.add_sign_in_counter
           render json: {
             token: JsonWebToken.encode(user_id: @user.id),
-            email: @user.email
+            email: @user.email,
           }
         else
           head :unauthorized
