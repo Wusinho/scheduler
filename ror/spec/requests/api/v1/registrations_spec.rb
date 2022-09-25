@@ -9,7 +9,7 @@ RSpec.describe 'Api::V1::Registrations', type: :request do
           name: 'heber',
           last_name: 'lazo',
           username: 'Hlazo',
-          password: '123456'
+          password: '345678aA'
         }
       }
       post '/api/v1/registrations', params: user
