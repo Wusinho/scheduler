@@ -57,5 +57,34 @@ RSpec.describe 'Api::V1::Departments', type: :request do
       expect(response).to have_http_status(:unprocessable_entity)
     end
 
+    it 'should not create a department if supervised form was not sent ' do
+      deparment_params = {
+        "department": {
+          "name": 'Science52'
+        }
+      }
+      post '/api/v1/departments', params: deparment_params,
+                                  headers: @auth
+      payload = JSON.parse(response.body)
+      expect(payload['id']).to be_nil
+      expect(payload['supervised_hrs']).to eql ['Supervised_hrs not sent']
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+    it 'should not create a department if range is empty ' do
+      deparment_params = {
+        "department": {
+          "name": 'Science52',
+          "supervised_hrs": []
+        }
+      }
+      post '/api/v1/departments', params: deparment_params,
+                                  headers: @auth
+      payload = JSON.parse(response.body)
+      expect(payload['id']).to be_nil
+      expect(payload['supervised_hrs']).to eql ['Range hrs is empty']
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
   end
 end
