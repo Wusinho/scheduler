@@ -2,20 +2,19 @@ class Department < ApplicationRecord
   belongs_to :organization
   validates :name, :supervised_hrs, presence: true
 
-  before_save :supervised_hrs_range
-  # before_save :min_hrs_range
+  validate :supervised_hrs_range
+  validate :min_hrs_range
 
   # after_save :crt_department_configuration
 
   def supervised_hrs_range
-    # p supervised_hrs.length <= 2
-    return unless self.supervised_hrs.length <= 2
+    return unless supervised_hrs.length <= 3
 
     errors.add :supervised_hrs, 'Can only add up to 2 ranges'
   end
 
   def min_hrs_range
-    return if min_hrs_check(self.supervised_hrs)
+    return if min_hrs_check(supervised_hrs)
 
     errors.add :supervised_hrs, 'Ranges must be greater than 4 hrs'
   end
