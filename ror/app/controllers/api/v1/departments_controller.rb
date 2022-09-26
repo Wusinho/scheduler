@@ -13,7 +13,7 @@ module Api
         if @department.save
           render json: @department, status: :created
         else
-          render json: @user.errors, status: :unprocessable_entity
+          render json: @department.errors, status: :unprocessable_entity
         end
       end
 
