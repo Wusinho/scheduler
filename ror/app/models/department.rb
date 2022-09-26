@@ -2,8 +2,8 @@ class Department < ApplicationRecord
   belongs_to :organization
   validates :name, :supervised_hrs, presence: true
 
-  validate :supervised_hrs_range
-  validate :min_hrs_range
+  before_save :supervised_hrs_range
+  before_save :min_hrs_range
 
   # after_save :crt_department_configuration
 
@@ -20,11 +20,11 @@ class Department < ApplicationRecord
   end
 
   def min_hrs_check(supervised_hrs)
-    check_hrs = spliting_supervised_hrs(supervised_hrs)
+    check_hrs = split_supervised_hrs(supervised_hrs)
     check_hrs.none? { |hr_range| hr_range < 4 }
   end
 
-  def spliting_supervised_hrs(supervised_hrs)
+  def split_supervised_hrs(supervised_hrs)
     supervised_hrs.map do |range|
       range.split('-').map(&:to_i).reverse.reduce(&:-)
     end
