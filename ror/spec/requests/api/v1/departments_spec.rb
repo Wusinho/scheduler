@@ -67,7 +67,7 @@ RSpec.describe 'Api::V1::Departments', type: :request do
                                   headers: @auth
       payload = JSON.parse(response.body)
       expect(payload['id']).to be_nil
-      expect(payload['supervised_hrs']).to eql ['Supervised_hrs not sent']
+      expect(payload['supervised_hrs']).to eql ["can't be blank"]
       expect(response).to have_http_status(:unprocessable_entity)
     end
 

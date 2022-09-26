@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_25_162116) do
 
   create_table "departments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.string "supervised_hrs", default: [], array: true
+    t.string "supervised_hrs", null: false, array: true
     t.uuid "organization_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
