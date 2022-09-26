@@ -7,8 +7,9 @@ RSpec.describe 'Api::V1::Departments', type: :request do
   describe 'should register a new user' do
     before(:each) do
       user = create_user
-      sign_up(user)
-      @auth_tokens = auth_for_user(user)
+      register_user(user)
+      auth_tokens = users_session(user)
+      @auth = { Authorization: auth_tokens['token'] }
     end
 
 
@@ -20,7 +21,7 @@ RSpec.describe 'Api::V1::Departments', type: :request do
         }
       }
       post '/api/v1/departments', params: deparment_params,
-                                  headers: { Authorization: @auth_tokens['token'] }
+                                  headers: @auth
       payload = JSON.parse(response.body)
       p payload
     end

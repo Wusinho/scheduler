@@ -15,11 +15,11 @@ module AuthorizationHelper
     }
   end
 
-  def sign_up(user)
+  def register_user(user)
     post '/api/v1/registrations', params: user
   end
 
-  def auth_for_user(user)
+  def users_session(user)
     session_params = {
       user: {
         email: user[:user][:email],
