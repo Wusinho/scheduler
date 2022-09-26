@@ -1,5 +1,7 @@
 class Department < ApplicationRecord
   belongs_to :organization
+  validates :name, :supervised_hrs, presence: true
+
   validate :supervised_hrs_range
   validate :min_hrs_range
 
@@ -19,12 +21,7 @@ class Department < ApplicationRecord
 
   def min_hrs_check(supervised_hrs)
     check_hrs = spliting_supervised_hrs(supervised_hrs)
-    ans = check_hrs.none? { |hr_range| hr_range < 4 }
-    p '*'*100
-    p ans
-    p '*'*100
-
-    ans
+    check_hrs.none? { |hr_range| hr_range < 4 }
   end
 
   def spliting_supervised_hrs(supervised_hrs)
