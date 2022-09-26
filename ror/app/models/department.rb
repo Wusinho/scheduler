@@ -8,7 +8,7 @@ class Department < ApplicationRecord
   # after_save :crt_department_configuration
 
   def supervised_hrs_range
-    return unless supervised_hrs.length <= 3
+    return unless supervised_hrs.length > 2
 
     errors.add :supervised_hrs, 'Can only add up to 2 ranges'
   end

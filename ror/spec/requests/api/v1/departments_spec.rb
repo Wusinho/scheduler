@@ -46,7 +46,7 @@ RSpec.describe 'Api::V1::Departments', type: :request do
       deparment_params = {
         "department": {
           "name": 'Science52',
-          "supervised_hrs": %w[8-9]
+          "supervised_hrs": %w[3-7 8-9]
         }
       }
       post '/api/v1/departments', params: deparment_params,
