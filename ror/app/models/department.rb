@@ -1,6 +1,5 @@
 class Department < ApplicationRecord
   belongs_to :organization
-  has_many :workers
   validates :name, :supervised_hrs, presence: true
   validate :empty_hrs_range, :supervised_hrs_range, :min_hrs_range
 
