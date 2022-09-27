@@ -1,7 +1,7 @@
 class CreateDepartments < ActiveRecord::Migration[7.0]
   def change
     create_table :departments, id: :uuid do |t|
-      t.string :name, null: false, index: { unique: true }
+      t.string :name, null: false
       t.string :supervised_hrs, array: true, null: false
       t.references :organization, null: false, foreign_key: true, type: :uuid
 

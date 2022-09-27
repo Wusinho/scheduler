@@ -32,7 +32,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_031838) do
     t.uuid "organization_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_departments_on_name", unique: true
     t.index ["organization_id"], name: "index_departments_on_organization_id"
   end
 
@@ -58,8 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_031838) do
   end
 
   create_table "workers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.string "last_name"
+    t.string "name", null: false
+    t.string "last_name", null: false
     t.string "email", null: false
     t.uuid "department_id", null: false
     t.datetime "created_at", null: false
