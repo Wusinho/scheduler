@@ -1,15 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Organization, type: :model do
+RSpec.describe Worker, type: :model do
   describe 'validations' do
     it 'validate presence of required fields' do
-      should validate_presence_of(:name)
+      should validate_presence_of(:email)
     end
 
     it 'validate relations' do
-      should belong_to(:user)
       should have_many(:departments)
     end
-  end
 
+  end
 end

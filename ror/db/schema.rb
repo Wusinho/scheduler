@@ -61,13 +61,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_031838) do
     t.string "name"
     t.string "last_name"
     t.string "email", null: false
-    t.uuid "organization_id", null: false
     t.uuid "department_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_workers_on_department_id"
     t.index ["email"], name: "index_workers_on_email", unique: true
-    t.index ["organization_id"], name: "index_workers_on_organization_id"
   end
 
   add_foreign_key "department_configurations", "departments"
@@ -75,5 +73,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_031838) do
   add_foreign_key "departments", "organizations"
   add_foreign_key "organizations", "users"
   add_foreign_key "workers", "departments"
-  add_foreign_key "workers", "organizations"
 end
