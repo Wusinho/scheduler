@@ -3,8 +3,7 @@ class Department < ApplicationRecord
   validates :name, :supervised_hrs, presence: true
   validate :empty_hrs_range, :supervised_hrs_range, :min_hrs_range
 
-  # after_save :crt_department_configuration
-
+  after_save :crt_department_configuration
 
   def empty_hrs_range
     return unless supervised_hrs && supervised_hrs.first.empty?
