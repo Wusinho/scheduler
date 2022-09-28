@@ -9,10 +9,10 @@ module Api
       def create
         sheet = Roo::Spreadsheet.open(params[:spread_sheet])
         clean_sheet = SpreadSheetService.new(sheet)
-
-        render json: {
-          workers: clean_sheet.sheet
-        }
+        p clean_sheet.spread_sym
+        # render json: {
+        #   workers: clean_sheet.sheet
+        # }
 
       end
 
