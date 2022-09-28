@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_27_180636) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_28_012807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -56,6 +56,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_180636) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "worker_available_hrs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "monday", null: false, array: true
+    t.string "tuesday", null: false, array: true
+    t.string "wednesday", null: false, array: true
+    t.string "thursday", null: false, array: true
+    t.string "friday", null: false, array: true
+    t.string "saturday", null: false, array: true
+    t.string "sunday", null: false, array: true
+    t.uuid "worker_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["worker_id"], name: "index_worker_available_hrs_on_worker_id"
+  end
+
   create_table "worker_departments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "department_id", null: false
     t.uuid "worker_id", null: false
@@ -78,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_180636) do
   add_foreign_key "department_configurations", "organizations"
   add_foreign_key "departments", "organizations"
   add_foreign_key "organizations", "users"
+  add_foreign_key "worker_available_hrs", "workers"
   add_foreign_key "worker_departments", "departments"
   add_foreign_key "worker_departments", "workers"
 end
