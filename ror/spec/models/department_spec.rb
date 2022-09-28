@@ -8,7 +8,7 @@ RSpec.describe Department, type: :model do
 
     it 'validate relations' do
       should belong_to(:organization)
-      should have_many(:workers)
+      should have_many(:worker_departments)
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_27_031838) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_27_180636) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -56,14 +56,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_031838) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "worker_departments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "department_id", null: false
+    t.uuid "worker_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["department_id"], name: "index_worker_departments_on_department_id"
+    t.index ["worker_id"], name: "index_worker_departments_on_worker_id"
+  end
+
   create_table "workers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "last_name", null: false
     t.string "email", null: false
-    t.uuid "department_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["department_id"], name: "index_workers_on_department_id"
     t.index ["email"], name: "index_workers_on_email", unique: true
   end
 
@@ -71,5 +78,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_031838) do
   add_foreign_key "department_configurations", "organizations"
   add_foreign_key "departments", "organizations"
   add_foreign_key "organizations", "users"
-  add_foreign_key "workers", "departments"
+  add_foreign_key "worker_departments", "departments"
+  add_foreign_key "worker_departments", "workers"
 end

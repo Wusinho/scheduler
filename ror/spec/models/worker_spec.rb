@@ -9,7 +9,7 @@ RSpec.describe Worker, type: :model do
     end
 
     it 'validate relations' do
-      should have_many(:departments)
+      should have_many(:worker_departments)
     end
 
   end
