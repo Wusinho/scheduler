@@ -70,11 +70,10 @@ class SpreadSheetService
       department = Department.find_by(name: worker[:department])
       current_worker = Worker.find_by_email(worker['e-mail'.to_sym])
 
-
       next unless current_worker
       next unless department
 
-      WorkerDepartment.new(
+      WorkerDepartment.create!(
         department_id: department.id,
         worker_id: current_worker.id
       )

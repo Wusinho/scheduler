@@ -13,6 +13,7 @@ module Api
         clean_sheet.save_departments
         clean_sheet.save_workers
         clean_sheet.save_working_hrs
+        clean_sheet.save_worker_departments
 
         # render json: {
         #   workers: clean_sheet.sheet
