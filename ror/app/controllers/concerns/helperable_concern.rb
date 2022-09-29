@@ -25,7 +25,7 @@ module HelperableConcern
 
   # removes the header
   def remove_header(spread_sheet)
-    spread_sheet.reject { |worker| worker.to_a.flatten.uniq.length == 11 }
+    spread_sheet.reject { |worker| worker.to_a.flatten.uniq.length <= 12 }
   end
 
 

@@ -4,6 +4,7 @@ class CreateWorkers < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.string :last_name, null: false
       t.string :email, null: false, index: { unique: true }
+      t.references :organization, null: false, foreign_key: true, type: :uuid
 
       t.timestamps
     end
