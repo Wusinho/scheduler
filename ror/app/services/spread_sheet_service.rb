@@ -45,11 +45,44 @@ class SpreadSheetService
 
   def save_working_hrs
     @spread_sym.map do |worker|
-      p worker
+      current_worker = Worker.find_by_email(worker['e-mail'.to_sym])
+      next unless current_worker
+
+      @worker_available_hrs = WorkerAvailableHr.new(
+        monday: [worker[:monday]],
+        tuesday: [worker[:tuesday]],
+        wednesday: [worker[:wednesday]],
+        thursday: [worker[:thursday]],
+        friday: [worker[:friday]],
+        saturday: [worker[:saturday]],
+        sunday: [worker[:sunday]],
+        worker_id: current_worker.id
+      )
+      next if @worker_available_hrs.save
+
+      error = { attribute: @worker_available_hrs.errors.first.attribute, type: @worker_available_hrs.errors.first.type }
+      worker[:errors] ? worker[:errors] << error : worker[:errors] = [error]
     end
+  end
+
+  def save_worker_departments
+    @spread_sym.each do |worker|
+      department = Department.find_by(name: worker[:department])
+      current_worker = Worker.find_by_email(worker['e-mail'.to_sym])
+
+
+      next unless current_worker
+      next unless department
+
+      WorkerDepartment.new(
+        department_id: department.id,
+        worker_id: current_worker.id
+      )
+
 
     end
 
+  end
 
 
 end
